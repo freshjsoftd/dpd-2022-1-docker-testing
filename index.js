@@ -10,10 +10,19 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.status(200).send(`Hi everyone from server`)
+  res.status(200).send(`Hi everyone from server`);
 });
+
+app.get('/error', (req, res) => {
+  res.status(404).send('NotFound');
+})
+
+app.get('/user', (req, res) => {
+  res.send({name: 'John', age: 30});
+})
 
 const httpServer = http.createServer(app);
 
 httpServer.listen(PORT, () => console.log(`Server listening on ${PORT}`));
-// Dockerfile
+
+module.exports.app = app;
